@@ -1,4 +1,5 @@
 from gc import DEBUG_COLLECTABLE
+from re import S
 from tabnanny import verbose
 from django.db import models
 
@@ -34,3 +35,13 @@ class Products(models.Model):
  
     def __str__(self):
         return f'{self.name} Колличество -{self.quantity}'
+    
+    #метод добавляющий нули в начало до 5-ти символов(00007)
+    def display_id(self):
+        return f"{self.id:05}"
+    
+    def display_discounted_price(self):
+        if self.discount:
+            return f"{round(float(self.price)-(float(self.price)*float(self.discount)*0.01))}"
+        
+        return self.price
