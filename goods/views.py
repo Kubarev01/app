@@ -7,7 +7,9 @@ from goods.models import Products
 # Create your views here.
 
 
-def catalog(request,category_slug,page=1):
+def catalog(request,category_slug):
+
+    page= request.GET.get('page', 1) #получить page если нет значения то 1
 
     if category_slug == 'all':
          goods= Products.objects.all()
@@ -15,7 +17,7 @@ def catalog(request,category_slug,page=1):
          goods=get_list_or_404(Products.objects.filter(category__slug=category_slug))
 
     paginator= Paginator(goods, 3)  # выводит по три товара на стр
-    current_page = paginator.page(page) #номер страницы
+    current_page = paginator.page(int(page)) #номер страницы
     context = {
         "title": "Home - каталог",
         "goods": current_page, #возвращает query-set урезанный до 3
