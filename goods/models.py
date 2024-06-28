@@ -42,6 +42,6 @@ class Products(models.Model):
     
     def display_discounted_price(self):
         if self.discount:
-            return f"{round(float(self.price)-(float(self.price)*float(self.discount)*0.01))}"
+            return round(float(self.price)-(float(self.price)*float(self.discount)*0.01))
         
         return self.price

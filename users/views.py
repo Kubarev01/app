@@ -23,7 +23,7 @@ def login(request):
                 auth.login(request, user)
                 messages.success(request,f"{user.username}, вы успешно авторизовались!")
                 
-                if request.POST.get('next',None):
+                if request.POST.get('next',None) and request.POST.get('next',None)!=reverse("user:logout"):
                     return HttpResponseRedirect(request.POST.get('next'))
                 
                 return HttpResponseRedirect(reverse('main:index'))
