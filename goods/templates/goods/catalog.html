@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load goods_tags %}
+{% load carts_tags %}
 
 {% block modal_cart %}
 {% include "carts/includes/cart_button.html" %}
@@ -96,7 +97,13 @@
                             <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
                                 width="32" height="32" >
                         </a>
+                        
+                      
+                        
+                    
+                    
                     </div>
+                  
                 </div>
             </div>
         </div>

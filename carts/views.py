@@ -44,10 +44,57 @@ def cart_add(request):
     
 
 def cart_remove(request):
-    cart=Cart.objects.get(id=cart_id)
-    cart.delete()
-     #Возвращает на ту же страницу где и был пользователь      
-    return redirect(request.META['HTTP_REFERER'])
+    cart_id=request.POST.get("cart_id")
 
-def cart_change(request,product_id):
-    ...
+    
+    cart=Cart.objects.get(id=cart_id)
+
+    quantity=cart.quantity
+    cart.delete()
+
+    user_cart= get_user_carts(request)
+    cart_items_html= render_to_string(
+        "carts/includes/included_cart.html",{"carts":user_cart}, request=request
+    )
+
+
+    response_data={
+        "message":"Товары удалены из корзины",
+        #передаем для перерисовки новую разметку сод корзины
+        "cart_items_html":cart_items_html,
+        "quantity_deleted": quantity,
+    }
+
+    return JsonResponse(response_data)
+
+
+
+
+
+
+ 
+
+def cart_change(request):
+    cart_id=request.POST.get("cart_id")
+    quantity= request.POST.get("quantity")
+
+    cart=Cart.objects.get(id=cart_id)
+
+    cart.quantity=quantity
+    cart.save()
+    updated_quantity = cart.quantity
+
+    user_cart= get_user_carts(request)
+    cart_items_html= render_to_string(
+        "carts/includes/included_cart.html",{"carts":user_cart}, request=request
+    )
+
+
+    response_data={
+        "message":"Колличество товаров изменено",
+        #передаем для перерисовки новую разметку сод корзины
+        "cart_items_html":cart_items_html,
+        "quantity": updated_quantity,
+    }
+
+    return JsonResponse(response_data)

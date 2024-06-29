@@ -6,6 +6,7 @@ from django import template
 from django.utils.http import urlencode
 
 
+from carts.models import Cart
 from goods.models import Categories
 
 
@@ -28,3 +29,4 @@ def highlight(text, words):
     for word in words:
         text = re.sub(r'(%s)' % re.escape(word), r'<mark>\1</mark>', text, flags=re.IGNORECASE)
     return mark_safe(text)
+
