@@ -69,7 +69,7 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Мой профиль
                             </a>
-                            {% if user.image %}
+                            {% comment %} {% if user.image %}
                                     <img src="{{ user.image.url }}"
                                         alt="Аватар пользователя" class="img-fluid rounded-circle"
                                         style="max-width: 50px;">
@@ -77,9 +77,9 @@
                                     <img src="{% static "deps/images/baseavatar.jpg" %}"
                                         alt="Аватар пользователя" class="img-fluid rounded-circle"
                                         style="max-width: 50px;">
-                                {% endif %}
+                                {% endif %} {% endcomment %}
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
+                                {%comment%}<li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>{%endcomment%}
                                 <li><a class="dropdown-item  text-white" href="{% url "users:profile" %}">Личный кабинет</a>
                                 </li>
                                 {% if user.is_admin or user.is_staff %}
@@ -136,7 +136,7 @@
                 </div>
                 <div class="col-lg-10">
                     <!-- Контент на странице -->
-                     {% include "includes/notifications.html" %}
+                    {% include "includes/notifications.html" %}
                     {% block content %}{% endblock  %}
                 </div>
             </div>

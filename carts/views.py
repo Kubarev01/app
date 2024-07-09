@@ -49,6 +49,7 @@ def cart_add(request):
         "message":"Товар добавлен в корзину",
         #передаем для перерисовки новую разметку сод корзины
         "cart_items_html":cart_items_html
+        
 
     }
 

@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col p-0">
-                    <p>x {{cart.product.display_discounted_price}} = </p>
+                    <p>x {{cart.product.display_discounted_price}} =   {{carts.total_price}}</p>
                 </div>
                 <div class="col p-0"><strong>{{cart.products_price}}$</strong></div>
                 <div class="col p-0">
@@ -50,3 +50,9 @@
         <h4 class="float-left"><strong>{{carts.total_price}}$</strong></h4>
     </div>
 </div>
+
+{% if carts and not order %}
+<a class="btn btn-dark" href="{% url "orders:create_order" %}">
+    Оформить заказ
+</a>
+{% endif %}
