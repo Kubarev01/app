@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 from carts.models import Cart
 from orders.forms import CreateOrder
 from orders.models import Order, OrderItem
-from users.views import login
 
 # Create your views here.
 @login_required()
